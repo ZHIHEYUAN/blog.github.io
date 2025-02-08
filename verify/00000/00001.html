@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">关于纸鹤鸢官网</title>
+    <meta name="description" content="介绍纸鹤鸢官网的相关信息，支持多语言切换。">
+    <meta name="keywords" content="纸鹤鸢, 官网, 多语言">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 美化返回按钮 */
+        #back-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        #back-button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 返回按钮 -->
+    <button id="back-button">返回</button>
+    <!-- 语言选择下拉框 -->
+    <select id="lang-selector">
+        <option value="zh">中文</option>
+        <option value="ru">Русский</option>
+        <option value="en">English</option>
+    </select>
+    <h1 id="heading">关于纸鹤鸢官网</h1>
+    <p id="description">官网由 HTML、CSS 和 JavaScript 语言编写，目前正在挂在 GitHub 上。在此，我感谢 GitHub 的 Pages 功能，它给予了手上没有那么多资金的开发者搭建自己博客的机会！</p>
+    <p id="supported-languages">目前已支持“中文”，“俄语”，“英语”。</p>
+    <p id="source-code">源码已经放在 GitHub 和 Gitee 上！</p>
+    <div id="link-container">
+        <a id="gitee-link" href="https://gitee.com/zhiheyuan239/blog">Gitee 链接</a>
+        <a id="github-link" href="https://github.com/ZHIHEYUAN/blog.github.io">GitHub 链接</a>
+    </div>
+
+    <script>
+        // 多语言文本对象，包含不同语言的页面内容
+        const texts = {
+            "zh": {
+                title: "关于纸鹤鸢官网",
+                heading: "关于纸鹤鸢官网",
+                description: "官网由 HTML、CSS 和 JavaScript 语言编写，目前正在挂在 GitHub 上。在此，我感谢 GitHub 的 Pages 功能，它给予了手上没有那么多资金的开发者搭建自己博客的机会！",
+                supportedLanguages: "目前已支持“中文”，“俄语”，“英语”。",
+                sourceCode: "源码已经放在 GitHub 和 Gitee 上！",
+                giteeLinkText: "Gitee 链接",
+                githubLinkText: "GitHub 链接",
+                langOptions: {
+                    zh: "中文",
+                    en: "English",
+                    ru: "Русский"
+                },
+                backButtonText: "返回"
+            },
+            "en": {
+                title: "About the Zenithrane Official Website",
+                heading: "About the Zenithrane Official Website",
+                description: "The official website is written in HTML, CSS, and JavaScript. Currently, it is hosted on GitHub. Here, I would like to thank GitHub's Pages feature, which provides an opportunity for developers with limited funds to build their own blogs!",
+                supportedLanguages: "Currently, 'Chinese', 'Russian', and 'English' are supported.",
+                sourceCode: "The source code has been placed on GitHub and Gitee!",
+                giteeLinkText: "Gitee Link",
+                githubLinkText: "GitHub Link",
+                langOptions: {
+                    zh: "Chinese",
+                    en: "English",
+                    ru: "Russian"
+                },
+                backButtonText: "Back"
+            },
+            "ru": {
+                title: "Официальный сайт Zenithrane",
+                heading: "Официальный сайт Zenithrane",
+                description: "Официальный сайт написан на языках HTML, CSS и JavaScript. В настоящее время он размещен на GitHub. Здесь я хочу поблагодарить функцию Pages GitHub, которая дает возможность разработчикам с ограниченными финансовыми возможностями создавать свои собственные блоги!",
+                supportedLanguages: "В настоящее время поддерживаются «китайский», «русский» и «английский» языки.",
+                sourceCode: "Исходный код размещен на GitHub и Gitee!",
+                giteeLinkText: "Ссылка на Gitee",
+                githubLinkText: "Ссылка на GitHub",
+                langOptions: {
+                    zh: "中文",
+                    en: "Английский",
+                    ru: "Русский"
+                },
+                backButtonText: "Назад"
+            }
+        };
+
+        // 获取语言选择下拉框元素
+        const langSelector = document.getElementById('lang-selector');
+        // 获取页面标题元素
+        const titleElement = document.getElementById('page-title');
+        // 获取页面主标题元素
+        const heading = document.getElementById('heading');
+        // 获取描述段落元素
+        const description = document.getElementById('description');
+        // 获取支持语言段落元素
+        const supportedLanguages = document.getElementById('supported-languages');
+        // 获取源码说明段落元素
+        const sourceCode = document.getElementById('source-code');
+        // 获取 Gitee 链接元素
+        const giteeLink = document.getElementById('gitee-link');
+        // 获取 GitHub 链接元素
+        const githubLink = document.getElementById('github-link');
+        // 获取返回按钮元素
+        const backButton = document.getElementById('back-button');
+
+        // 从本地存储中获取用户之前选择的语言，若没有则默认中文
+        let currentLang = localStorage.getItem('selectedLanguage') || 'zh';
+        // 设置下拉框初始选中值
+        langSelector.value = currentLang;
+
+        // 语言切换函数
+        function switchLanguage() {
+            // 获取当前选择的语言
+            currentLang = langSelector.value;
+            // 将选择的语言存储到本地存储
+            localStorage.setItem('selectedLanguage', currentLang);
+
+            // 更新页面标题
+            titleElement.textContent = texts[currentLang].title;
+            // 更新页面主标题
+            heading.textContent = texts[currentLang].heading;
+            // 更新描述段落
+            description.textContent = texts[currentLang].description;
+            // 更新支持语言段落
+            supportedLanguages.textContent = texts[currentLang].supportedLanguages;
+            // 更新源码说明段落
+            sourceCode.textContent = texts[currentLang].sourceCode;
+            // 更新 Gitee 链接文本
+            giteeLink.textContent = texts[currentLang].giteeLinkText;
+            // 更新 GitHub 链接文本
+            githubLink.textContent = texts[currentLang].githubLinkText;
+            // 更新返回按钮文本
+            backButton.textContent = texts[currentLang].backButtonText;
+
+            // 更新语言选择下拉框选项文本
+            const options = langSelector.options;
+            for (let i = 0; i < options.length; i++) {
+                const langCode = options[i].value;
+                options[i].text = texts[currentLang].langOptions[langCode];
+            }
+        }
+
+        // 页面加载时初始化语言
+        switchLanguage();
+        // 监听语言选择下拉框的变化事件
+        langSelector.addEventListener('change', switchLanguage);
+
+        // 为返回按钮添加点击事件监听器
+        backButton.addEventListener('click', function () {
+            window.history.back();
+        });
+    </script>
+</body>
+
+</html>
