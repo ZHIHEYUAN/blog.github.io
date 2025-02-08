@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+    <!-- 引入外部 CSS 文件以应用样式 -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- 设置字符编码为 UTF - 8 -->
+    <meta charset="utf-8">
+    <!-- 页面标题，可动态切换语言 -->
+    <title id="home_pape">主页</title>
+    <!-- 页面描述，有助于搜索引擎优化 -->
+    <meta name="description" content="纸鹤鸢主页，包含官网介绍、全损音乐制作器和插件中心等内容，支持多语言切换。">
+    <!-- 页面关键词，有助于搜索引擎优化 -->
+    <meta name="keywords" content="纸鹤鸢, 全损音乐制作器, 插件中心, 多语言">
+</head>
+
+<body>
+    <!-- 语言选择下拉框 -->
+    <select id="lang-selector">
+        <option value="zh">中文</option>
+        <option value="ru">Русский</option>
+        <option value="en">English</option>
+    </select>
+    <!-- 页面主标题，可动态切换语言 -->
+    <h1 id="heading">纸鹤鸢_主页</h1>
+    <!-- 内容区域，包含链接列表 -->
+    <div id="div-content">
+        <ul>
+            <!-- 关于官网链接 -->
+            <li>
+                <a href="verify/00001.html">关于官网</a>
+            </li>
+            <!-- 全损音乐制作器链接 -->
+            <li>
+                <a href="verify/00002.html">全损音乐制作器</a>
+            </li>
+            <!-- 纸鹤鸢插件中心链接 -->
+            <li>
+                <a href="verify/00003.html">纸鹤鸢插件中心（ZPC）</a>
+            </li>
+        </ul>
+    </div>
+    <!-- 社交账号区域 -->
+    <div id="social-links">
+        <!-- 社交账号提示信息，可动态切换语言 -->
+        <p class="social-accounts-text">我们的社交账号：</p>
+        <!-- 哔哩哔哩社交链接 -->
+        <a href="https://space.bilibili.com/3461580769462356?spm_id_from=333.788.0.0">哔哩哔哩bilibili</a>
+        <!-- Gitee 社交链接 -->
+        <a href="https://gitee.com/zhiheyuan239">gitee</a>
+        <!-- GitHub 社交链接 -->
+        <a href="https://github.com/ZHIHEYUAN">github</a>
+    </div>
+    <!-- 网名搜索提示区域 -->
+    <div id="social-links">
+        <!-- 网名搜索提示信息，可动态切换语言 -->
+        <p class="social-search-text">我们的名字（网名），您能在社交平台搜索到我们：</p>
+        <!-- 网名展示 -->
+        <p>纸鹤鸢</p>
+        <p>zhiheyuan</p>
+        <p>Zenithrane</p>
+    </div>
+
+    <script>
+        // 多语言文本对象，包含不同语言的页面内容
+        const texts = {
+            "zh": {
+                title: "主页",
+                heading: "纸鹤鸢_主页",
+                // 确保链接路径与 HTML 中一致
+                divContent: `<ul>
+                    <li>
+                        <a href="verify/00001.html">关于官网</a>
+                    </li>
+                    <li>
+                        <a href="verifyverify/00002.html">全损音乐制作器</a>
+                    </li>
+                    <li>
+                        <a href="verify/00003.html">纸鹤鸢插件中心（ZPC）</a>
+                    </li>
+                </ul>`,
+                socialAccountsText: "我们的社交账号：",
+                socialSearchText: "我们的名字（网名），您能在社交平台搜索到我们：",
+                langOptions: {
+                    zh: "中文",
+                    en: "English",
+                    ru: "Русский"
+                }
+            },
+            "en": {
+                title: "Home Page",
+                heading: "Zenithrane - Home Page",
+                // 确保链接路径与 HTML 中一致
+                divContent: `<ul>
+                    <li>
+                        <a href="verify/00001.html">About the official website</a>
+                    </li>
+                    <li>
+                        <a href="verify/00002.html">Total Loss Music Maker</a>
+                    </li>
+                    <li>
+                        <a href="verify/00003.html">Zenithrane Plugin Center (ZPC)</a>
+                    </li>
+                </ul>`,
+                socialAccountsText: "Our social accounts:",
+                socialSearchText: "Our names (online names), you can search for us on social platforms:",
+                langOptions: {
+                    zh: "中文",
+                    en: "English",
+                    ru: "Русский"
+                }
+            },
+            "ru": {
+                title: "Главная страница",
+                heading: "Zenithrane - Главная страница",
+                // 确保链接路径与 HTML 中一致
+                divContent: `<ul>
+                    <li>
+                        <a href="verify/00001.html">Официальный сайт</a>
+                    </li>
+                    <li>
+                        <a href="verify/00002.html">Конструктор полностью поврежденной музыки</a>
+                    </li>
+                    <li>
+                        <a href="verify/00003.html">Центр плагинов Zenithrane (ZPC)</a>
+                    </li>
+                </ul>`,
+                socialAccountsText: "Наши социальные аккаунты:",
+                socialSearchText: "Наши имена (псевдонимы), вы можете найти нас на социальных платформах:",
+                langOptions: {
+                    zh: "中文",
+                    en: "English",
+                    ru: "Русский"
+                }
+            }
+        };
+
+        // 获取语言选择下拉框元素
+        const langSelector = document.getElementById('lang-selector');
+        // 获取页面标题元素
+        const titleElement = document.getElementById('home_pape');
+        // 获取页面主标题元素
+        const heading = document.getElementById('heading');
+        // 获取内容区域元素
+        const divContent = document.getElementById('div-content');
+        // 获取社交账号提示元素列表
+        const socialAccountParagraphs = document.querySelectorAll('.social-accounts-text');
+        // 获取网名搜索提示元素
+        const socialSearchParagraph = document.querySelector('.social-search-text');
+
+        // 从本地存储中获取用户之前选择的语言，若没有则默认中文
+        let currentLang = localStorage.getItem('selectedLanguage') || 'zh';
+        // 设置下拉框初始选中值
+        langSelector.value = currentLang;
+
+        // 语言切换函数
+        function switchLanguage() {
+            // 获取当前选择的语言
+            currentLang = langSelector.value;
+            // 将选择的语言存储到本地存储
+            localStorage.setItem('selectedLanguage', currentLang);
+
+            // 更新页面标题
+            titleElement.textContent = texts[currentLang].title;
+            // 更新页面主标题
+            heading.textContent = texts[currentLang].heading;
+            // 更新内容区域
+            divContent.innerHTML = texts[currentLang].divContent;
+            // 更新社交账号提示信息
+            socialAccountParagraphs.forEach(paragraph => {
+                paragraph.textContent = texts[currentLang].socialAccountsText;
+            });
+            // 更新网名搜索提示信息
+            socialSearchParagraph.textContent = texts[currentLang].socialSearchText;
+
+            // 更新语言选择下拉框选项文本
+            const options = langSelector.options;
+            for (let i = 0; i < options.length; i++) {
+                const langCode = options[i].value;
+                options[i].text = texts[currentLang].langOptions[langCode];
+            }
+        }
+
+        // 页面加载时初始化语言
+        switchLanguage();
+        // 监听语言选择下拉框的变化事件
+        langSelector.addEventListener('change', switchLanguage);
+    </script>
+</body>
+
+</html>

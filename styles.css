@@ -1,0 +1,134 @@
+/* 设置全局字体和背景颜色 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 语言选择下拉列表样式 */
+#lang-selector {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#lang-selector:hover {
+    background-color: #0056b3;
+}
+
+/* 标题样式 */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 80px;
+    font-size: 48px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+/* 内容容器样式 */
+#div-content {
+    background-color: #fff;
+    width: 80%;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 列表样式 */
+#div-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#div-content li {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 15px;
+    transition: background-color 0.3s ease;
+    background-color: #f0f8ff;
+}
+
+#div-content li:nth-child(odd) {
+    background-color: #e9f7ef;
+}
+
+#div-content li:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#div-content li:hover {
+    background-color: #c2e7d3;
+}
+
+/* 链接样式 */
+#div-content a {
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 18px;
+}
+
+#div-content a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* 社交账号部分样式 */
+#social-links {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#social-links p {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+#social-links a {
+    display: inline-block;
+    margin: 0 15px;
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 18px;
+}
+
+#social-links a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 32px;
+    }
+
+    #div-content {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #lang-selector {
+        top: 10px;
+        right: 10px;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}

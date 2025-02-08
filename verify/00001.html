@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>验证码页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #4CA1AF, #C4E0E5);
+        }
+
+       .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+       .captcha-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #captchaCanvas {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 15px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #countdown {
+            color: #666;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>请输入验证码</h2>
+        <div class="captcha-container">
+            <canvas id="captchaCanvas" width="150" height="50"></canvas>
+            <button onclick="refreshCaptcha()">刷新验证码</button>
+        </div>
+        <input type="text" id="userInput" placeholder="输入验证码">
+        <p id="countdown"></p>
+        <button onclick="verifyCaptcha()">提交</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('captchaCanvas');
+        const ctx = canvas.getContext('2d');
+        const countdownElement = document.getElementById('countdown');
+        let captchaText = '';
+        let countdown = 60;
+        let countdownInterval;
+
+        function generateCaptcha() {
+            const length = 6;
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            captchaText = '';
+            for (let i = 0; i < length; i++) {
+                captchaText += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return captchaText;
+        }
+
+        function drawCaptcha() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = '30px Arial';
+            ctx.fillStyle = '#333';
+            for (let i = 0; i < captchaText.length; i++) {
+                const x = 20 + i * 20;
+                const y = 35 + Math.random() * 10;
+                ctx.save();
+                ctx.rotate((Math.random() - 0.5) * 0.3);
+                ctx.fillText(captchaText[i], x, y);
+                ctx.restore();
+            }
+            for (let i = 0; i < 5; i++) {
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.strokeStyle = '#ccc';
+                ctx.stroke();
+            }
+        }
+
+        function refreshCaptcha() {
+            generateCaptcha();
+            drawCaptcha();
+            resetCountdown();
+        }
+
+        function resetCountdown() {
+            clearInterval(countdownInterval);
+            countdown = 60;
+            countdownElement.textContent = `剩余时间: ${countdown} 秒`;
+            countdownInterval = setInterval(() => {
+                if (countdown > 0) {
+                    countdown--;
+                    countdownElement.textContent = `剩余时间: ${countdown} 秒`;
+                } else {
+                    clearInterval(countdownInterval);
+                    alert('验证码已过期，请刷新验证码！');
+                    refreshCaptcha();
+                }
+            }, 1000);
+        }
+
+        function verifyCaptcha() {
+            const userInput = document.getElementById('userInput').value;
+            if (countdown <= 0) {
+                alert('验证码已过期，请刷新验证码！');
+                return;
+            }
+            // 将用户输入和验证码都转换为小写后进行比较
+            if (userInput.toLowerCase() === captchaText.toLowerCase()) {
+                window.location.href = '00000/00001.html';
+            } else {
+                alert('验证码输入错误，请重新输入！');
+                refreshCaptcha();
+            }
+        }
+
+        generateCaptcha();
+        drawCaptcha();
+        resetCountdown();
+    </script>
+</body>
+
+</html>
